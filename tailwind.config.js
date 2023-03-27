@@ -16,6 +16,24 @@ module.exports = {
       xl: '1280px',
       '2xl': '1536px',
     },
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            h2: {
+              borderBottom: '1px solid #d0d5e7',
+            },
+            a: {
+              textDecoration: 'none',
+              color: '#4883D1',
+              '&:hover': {
+                textDecoration: 'underline',
+              },
+            },
+          },
+        },
+      },
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }
