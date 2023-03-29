@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 async function getPost(params: any) {
   const response = await fetch(
-    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
+    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clfqi8une019a01uebyhb36aq/master',
     {
       method: 'POST',
       headers: {
@@ -19,6 +19,11 @@ async function getPost(params: any) {
                 title
                 slug
                 content
+                category {
+                  ... on Category {
+                    name
+                  }
+                }
               }
           }`,
         variables: {
@@ -40,10 +45,15 @@ export default async function Page({ params }: any) {
         <Image
           src={post.featuredImage.url}
           alt=""
-          layout="fill"
-          objectFit="cover"
-          className="!m-0"
+          fill
+          className="!m-0 object-cover"
         />
+      </div>
+      <div className="flex flex-row gap-4 pb-4">
+        <span className="px-2 py-1 bg-[#222] text-white">
+          {post.category.name}
+        </span>
+        <span className="py-1">5 min Czytania</span>
       </div>
       <h1 className="">{post.title}</h1>
 

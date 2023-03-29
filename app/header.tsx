@@ -1,36 +1,60 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Header = () => {
+async function getAllCategories() {
+  const response = await fetch(
+    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clfqi8une019a01uebyhb36aq/master',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        query: `{
+          categories {
+            name
+            slug
+          }
+        }
+        `,
+      }),
+    }
+  )
+  const { data } = await response.json()
+  return data.categories
+}
+
+export default async function Header(): JSX.Element {
+  const categories = await getAllCategories()
   return (
-    <header className="max-w[1440] mx-auto flex items-center justify-between py-6 px-4 lg:px-20">
+    <header className="max-w-[1440px] mx-auto flex items-center justify-between py-6 px-4 lg:px-20">
       <Link href="#">
         <Image src="/logo.svg" alt="" width={170} height={42} />
       </Link>
-      <nav className="hidden sm:inline">
+      <nav className="hidden lg:inline">
         <ul className="flex flex-row items-center gap-2 text-lg">
-          <Link href="category/aplikacje-webowe">
-            <li>Aplikacje Webowe</li>
-          </Link>
-          <p>·</p>
-          <Link href="category/startupy">
-            <li>Startupy</li>
-          </Link>
-          <p>·</p>
-          <Link href="#">
+          {categories.map(({ name, slug }) => (
+            <>
+              <Link href={`category/` + slug} key={name}>
+                <li>{name}</li>
+              </Link>
+              <p>·</p>
+            </>
+          ))}
+
+          <Link href="https://discord.com/channels/381092165729910786/">
             <Image src="/discord.svg" alt="" width={30} height={30} />
           </Link>
           <p>·</p>
-          <Link href="#">
+          <Link href="https://github.com/skni-kod/">
             <Image src="/github.svg" alt="" width={30} height={30} />
           </Link>
         </ul>
       </nav>
-      <button className="sm:hidden">
+      <button className="lg:hidden">
         <Image src="/hamburger.svg" alt="" width={42} height={42} />
       </button>
     </header>
   )
 }
-
-export default Header
