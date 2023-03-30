@@ -6,11 +6,17 @@ import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({ subsets: ['latin-ext'], weight: '400' })
 
-export const metadata = {
+export const metadata: Metadata = {
+  title: {
+    default: 'Kod Materials',
+    template: '%s | Kod Materials',
+  },
+  description:
+    'Kod Materials to miejsce, które dostarcza najnowszych materiałów dla studentów informatyki z Politechniki Rzeszowskiej.',
   openGraph: {
     title: 'Kod Materiały',
     description:
-      'Strona "Kod" to miejsce, które dostarcza najnowszych materiałów dla studentów informatyki z Politechniki Rzeszowskiej. Znajdziesz tutaj artykuły, tutoriale i poradniki na tematy związane z programowaniem, bazami danych, algorytmiką i wieloma innymi zagadnieniami z dziedziny informatyki. Nasza strona oferuje również dostęp do darmowych materiałów edukacyjnych oraz ciekawych wykładów prowadzonych przez naszych ekspertów. Dołącz do nas już dziś i zacznij rozwijać swoje umiejętności w dziedzinie informatyki!',
+      'Kod Materials to miejsce, które dostarcza najnowszych materiałów dla studentów informatyki z Politechniki Rzeszowskiej.',
     url: 'https://kod-materialy.vercel.app/',
     siteName: 'Kod Materiały',
     images: [

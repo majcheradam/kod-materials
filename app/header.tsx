@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 async function getAllCategories() {
   const response = await fetch(
-    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clfqi8une019a01uebyhb36aq/master',
+    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
     {
       method: 'POST',
       headers: {
@@ -25,6 +25,11 @@ async function getAllCategories() {
   return data.categories
 }
 
+interface Categories {
+  name: string
+  slug: string
+}
+
 export default async function Header(): JSX.Element {
   const categories = await getAllCategories()
   return (
@@ -34,10 +39,10 @@ export default async function Header(): JSX.Element {
       </Link>
       <nav className="hidden lg:inline">
         <ul className="flex flex-row items-center gap-2 text-lg">
-          {categories.map(({ name, slug }) => (
+          {categories.map((categories: Categories) => (
             <>
-              <Link href={`category/` + slug} key={name}>
-                <li>{name}</li>
+              <Link href={`category/` + categories.slug} key={categories.name}>
+                <li>{categories.name}</li>
               </Link>
               <p>·</p>
             </>

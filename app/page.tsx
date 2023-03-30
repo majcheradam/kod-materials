@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 async function getAllPosts() {
   const response = await fetch(
-    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clfqi8une019a01uebyhb36aq/master',
+    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
     {
       method: 'POST',
       headers: {
@@ -49,8 +49,8 @@ export default async function Home() {
   return (
     <main className="max-w-[1440px] mx-auto py-6 px-4 lg:px-20">
       <section className="max-w-[1440px] mx-auto gap-4 j flex lg:justify-start justify-center flex-wrap">
-        {posts.map((post: Post, i: number) => (
-          <div className="flex flex-col max-w-[416px]" key={i}>
+        {posts.map((post: Post) => (
+          <div className="flex flex-col max-w-[416px]" key={post.title}>
             <div className="h-[300px] w-[416px] relative">
               <Image
                 src={post.featuredImage.url}

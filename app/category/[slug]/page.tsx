@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 async function getPost(params: any) {
   const response = await fetch(
-    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clfqi8une019a01uebyhb36aq/master',
+    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
     {
       method: 'POST',
       headers: {
@@ -49,7 +49,6 @@ interface Post {
 
 export default async function Page({ params }: any) {
   const posts = await getPost(params)
-  console.log(posts)
 
   return (
     <main className="max-w[1440] mx-auto flexjustify-between py-6 px-4 lg:px-20">
