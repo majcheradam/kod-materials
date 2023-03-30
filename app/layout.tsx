@@ -1,5 +1,5 @@
 import './globals.css'
-import Header from './header'
+import { Header } from './header'
 import type { Metadata } from 'next'
 
 import { Roboto } from 'next/font/google'
@@ -39,7 +39,6 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={roboto.className}>
-        {/* @ts-expect-error Async Server Component */}
         <Header />
         {children}
       </body>

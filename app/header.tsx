@@ -30,7 +30,7 @@ interface Categories {
   slug: string
 }
 
-export default async function Header() {
+export const Header = (async () => {
   const categories = await getAllCategories()
   return (
     <header className="max-w-[1440px] mx-auto flex items-center justify-between py-6 px-4 lg:px-20">
@@ -38,28 +38,33 @@ export default async function Header() {
         <Image src="/logo.svg" alt="" width={170} height={42} priority />
       </Link>
       <nav className="hidden lg:inline">
-        <ul className="flex flex-row items-center gap-2 text-lg">
+        <ul className="flex flex-row items-center gap-4 text-lg">
           {categories.map((categories: Categories) => (
-            <>
-              <li>
-                <Link
-                  href={`category/` + categories.slug}
-                  key={categories.name}
-                >
-                  {categories.name}
-                </Link>
-              </li>
-              <p>·</p>
-            </>
+            <li
+              className="relative after:absolute after:w-1 after:h-1 after:rounded-full after:-right-2.5 after:top-1/2 after:-translate-y-1/2 after:bg-current"
+              key={categories.name}
+            >
+              <Link href={`category/` + categories.slug} key={categories.name}>
+                {categories.name}
+              </Link>
+            </li>
           ))}
-
-          <Link href="https://discord.com/channels/381092165729910786/">
-            <Image src="/discord.svg" alt="" width={30} height={30} priority />
-          </Link>
-          <p>·</p>
-          <Link href="https://github.com/skni-kod/">
-            <Image src="/github.svg" alt="" width={30} height={30} priority />
-          </Link>
+          <li className="relative after:absolute after:w-1 after:h-1 after:rounded-full after:-right-2.5 after:top-1/2 after:-translate-y-1/2 after:bg-current">
+            <Link href="https://discord.com/channels/381092165729910786/">
+              <Image
+                src="/discord.svg"
+                alt=""
+                width={30}
+                height={30}
+                priority
+              />
+            </Link>
+          </li>
+          <li>
+            <Link href="https://github.com/skni-kod/">
+              <Image src="/github.svg" alt="" width={30} height={30} priority />
+            </Link>
+          </li>
         </ul>
       </nav>
       <button className="lg:hidden">
@@ -67,4 +72,4 @@ export default async function Header() {
       </button>
     </header>
   )
-}
+}) as unknown as () => JSX.Element
