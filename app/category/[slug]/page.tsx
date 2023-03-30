@@ -12,12 +12,16 @@ async function getPost(params: any) {
       },
       body: JSON.stringify({
         query: `{
-          posts(where: {category: {Category: {slug: "${params.slug}"}}}) {
+          posts(
+            where: {category: {Category: {slug: "${params.slug}"}}}
+            orderBy: createdAt_DESC
+            ) {
             featuredImage {
               url
             }
             title
             slug
+            excerpt
             category {
               ... on Category {
                 name
@@ -39,6 +43,7 @@ async function getPost(params: any) {
 interface Post {
   title: string
   slug: string
+  excerpt: string
   featuredImage: {
     url: string
   }
@@ -56,7 +61,7 @@ export default async function Page({ params }: any) {
         <section className="max-w[1440] gap-4 mx-auto flex flex-wrap">
           {posts.map((post: Post) => (
             <div className="flex flex-col max-w-[416px]" key={post.title}>
-              <div className="h-[300px] w-[416px] relative">
+              <div className="h-[300px] w-full relative px-4">
                 <Image
                   src={post.featuredImage.url}
                   alt=""
@@ -77,15 +82,13 @@ export default async function Page({ params }: any) {
                 </div>
                 <div className="flex flex-col gap-2">
                   <h2 className="text-2xl font-bold">{post.title}</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Quod pariatur blanditiis est eius.
-                  </p>
+                  <p className="line-clamp-2">{post.excerpt}</p>
                 </div>
                 <div className="flex">
                   <Link
                     href={`post/` + post.slug}
                     className="rounded-sm border-solid border-2 py-2 px-4 border-black"
+                    aria-label={`Czytaj artykuł ` + post.title}
                   >
                     Czytaj więcej →
                   </Link>

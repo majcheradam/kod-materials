@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 import { Roboto } from 'next/font/google'
 
-const roboto = Roboto({ subsets: ['latin-ext'], weight: '400' })
+const roboto = Roboto({ subsets: ['latin-ext'], weight: ['400', '700'] })
 
 export const metadata: Metadata = {
   title: {
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   description:
     'Kod Materials to miejsce, które dostarcza najnowszych materiałów dla studentów informatyki z Politechniki Rzeszowskiej.',
   openGraph: {
-    title: 'Kod Materiały',
+    title: 'Kod Materials',
     description:
       'Kod Materials to miejsce, które dostarcza najnowszych materiałów dla studentów informatyki z Politechniki Rzeszowskiej.',
     url: 'https://kod-materialy.vercel.app/',
-    siteName: 'Kod Materiały',
+    siteName: 'Kod Materials',
     images: [
       {
         url: 'https://kod-materialy.vercel.app/og.png',

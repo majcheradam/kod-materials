@@ -40,7 +40,7 @@ export default async function Page({ params }: any) {
   const post = await getPost(params)
 
   return (
-    <article className="mx-auto px-4 prose md:prose-lg prose-slate">
+    <article className="mx-auto px-4 md:px-0 prose md:prose-lg prose-slate">
       <div className="h-[240px] sm:h-[300px] md:h-[400px] w-full relative mb-10">
         <Image
           src={post.featuredImage.url}
@@ -60,7 +60,6 @@ export default async function Page({ params }: any) {
         <span className="py-1">5 min Czytania</span>
       </div>
       <h1 className="">{post.title}</h1>
-
       <Markdown>{post.content}</Markdown>
     </article>
   )

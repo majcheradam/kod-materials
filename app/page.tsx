@@ -12,12 +12,13 @@ async function getAllPosts() {
       },
       body: JSON.stringify({
         query: `{
-              posts {
+          posts(orderBy: createdAt_DESC) {
                 featuredImage {
                   url
                 }
                 title
                 slug
+                excerpt
                 category {
                   ... on Category {
                     name
@@ -35,6 +36,7 @@ async function getAllPosts() {
 interface Post {
   title: string
   slug: string
+  excerpt: string
   featuredImage: {
     url: string
   }
@@ -47,11 +49,11 @@ export default async function Home() {
   const posts = await getAllPosts()
 
   return (
-    <main className="max-w-[1440px] mx-auto py-6 px-4 lg:px-20">
+    <main className="max-w-[1440px] mx-auto py-6 lg:px-20">
       <section className="max-w-[1440px] mx-auto gap-4 j flex lg:justify-start justify-center flex-wrap">
         {posts.map((post: Post) => (
           <div className="flex flex-col max-w-[416px]" key={post.title}>
-            <div className="h-[300px] w-[416px] relative">
+            <div className="h-[300px] w-full relative px-4">
               <Image
                 src={post.featuredImage.url}
                 alt=""
@@ -72,10 +74,7 @@ export default async function Home() {
               </div>
               <div className="flex flex-col gap-2">
                 <h2 className="text-2xl font-bold">{post.title}</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod
-                  pariatur blanditiis est eius.
-                </p>
+                <p className="line-clamp-2">{post.excerpt}</p>
               </div>
               <div className="flex">
                 <Link

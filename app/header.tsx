@@ -77,7 +77,7 @@ export const Header = (async () => {
           </li>
         </ul>
       </nav>
-      <button className="lg:hidden">
+      <button className="lg:hidden" aria-label="Otwórz menu" role="button">
         <Image src="/hamburger.svg" alt="" width={42} height={42} priority />
       </button>
     </header>
