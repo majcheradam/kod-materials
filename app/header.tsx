@@ -41,9 +41,14 @@ export default async function Header() {
         <ul className="flex flex-row items-center gap-2 text-lg">
           {categories.map((categories: Categories) => (
             <>
-              <Link href={`category/` + categories.slug} key={categories.name}>
-                <li>{categories.name}</li>
-              </Link>
+              <li>
+                <Link
+                  href={`category/` + categories.slug}
+                  key={categories.name}
+                >
+                  {categories.name}
+                </Link>
+              </li>
               <p>·</p>
             </>
           ))}

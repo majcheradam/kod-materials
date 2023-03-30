@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className={roboto.className}>
+        {/* @ts-expect-error Async Server Component */}
         <Header />
         {children}
       </body>
