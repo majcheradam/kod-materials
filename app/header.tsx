@@ -30,7 +30,7 @@ interface Categories {
   slug: string
 }
 
-export default async function Header(): JSX.Element {
+export default async function Header() {
   const categories = await getAllCategories()
   return (
     <header className="max-w-[1440px] mx-auto flex items-center justify-between py-6 px-4 lg:px-20">
