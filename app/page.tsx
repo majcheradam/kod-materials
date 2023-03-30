@@ -81,6 +81,7 @@ export default async function Home() {
                 <Link
                   href={`post/` + post.slug}
                   className="rounded-sm border-solid border-2 py-2 px-4 border-black"
+                  aria-label={`Czytaj artykuł ` + post.title}
                 >
                   Czytaj więcej →
                 </Link>
