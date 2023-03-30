@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 async function getPost(params: any) {
   const response = await fetch(
-    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
+    'https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clfqi8une019a01uebyhb36aq/master',
     {
       method: 'POST',
       headers: {
