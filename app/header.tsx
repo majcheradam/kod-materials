@@ -35,7 +35,7 @@ export default async function Header() {
   return (
     <header className="max-w-[1440px] mx-auto flex items-center justify-between py-6 px-4 lg:px-20">
       <Link href="#">
-        <Image src="/logo.svg" alt="" width={170} height={42} />
+        <Image src="/logo.svg" alt="" width={170} height={42} priority />
       </Link>
       <nav className="hidden lg:inline">
         <ul className="flex flex-row items-center gap-2 text-lg">
@@ -49,16 +49,16 @@ export default async function Header() {
           ))}
 
           <Link href="https://discord.com/channels/381092165729910786/">
-            <Image src="/discord.svg" alt="" width={30} height={30} />
+            <Image src="/discord.svg" alt="" width={30} height={30} priority />
           </Link>
           <p>·</p>
           <Link href="https://github.com/skni-kod/">
-            <Image src="/github.svg" alt="" width={30} height={30} />
+            <Image src="/github.svg" alt="" width={30} height={30} priority />
           </Link>
         </ul>
       </nav>
       <button className="lg:hidden">
-        <Image src="/hamburger.svg" alt="" width={42} height={42} />
+        <Image src="/hamburger.svg" alt="" width={42} height={42} priority />
       </button>
     </header>
   )
