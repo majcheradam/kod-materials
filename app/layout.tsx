@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 import { Roboto } from 'next/font/google'
 
-const roboto = Roboto({ subsets: ['latin-ext'], weight: ['400', '700'] })
+const roboto = Roboto({ subsets: ['latin-ext'], weight: ['400'] })
 
 export const metadata: Metadata = {
   title: {
