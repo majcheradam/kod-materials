@@ -56,9 +56,9 @@ export default async function Page({ params }: any) {
   const posts = await getPost(params)
 
   return (
-    <main className="max-w[1440] mx-auto flexjustify-between py-6 px-4 lg:px-20">
+    <main className="max-w[1440px] mx-auto flexjustify-between max-w-[1440px] py-6 lg:px-20">
       {posts[0] ? (
-        <section className="max-w[1440] gap-4 mx-auto flex flex-wrap">
+        <section className="max-w[1440px] gap-4 mx-auto flex flex-wrap">
           {posts.map((post: Post) => (
             <div className="flex flex-col max-w-[416px]" key={post.title}>
               <div className="h-[300px] w-full relative px-4">
