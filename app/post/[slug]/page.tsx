@@ -1,5 +1,6 @@
 import Markdown from 'markdown-to-jsx'
 import Image from 'next/image'
+import { shimmer, toBase64 } from '@/lib/image-blur'
 
 async function getPost(params: any) {
   const response = await fetch(
@@ -41,7 +42,7 @@ export default async function Page({ params }: any) {
   const post = await getPost(params)
 
   return (
-    <article className="mx-auto px-4 md:px-0 prose md:prose-lg prose-slate">
+    <article className="mx-auto mb-10 px-4 md:px-0 prose md:prose-lg prose-slate">
       <div className="h-[240px] sm:h-[300px] md:h-[400px] w-full relative mb-10">
         <Image
           src={post.featuredImage.url}
@@ -54,7 +55,7 @@ export default async function Page({ params }: any) {
           )}`}
         />
       </div>
-      <div className="flex flex-row gap-4 pb-4">
+      <div className="flex flex-row gap-4 mb-6">
         <span className="px-2 py-1 bg-[#222] text-white">
           {post.category.name}
         </span>
@@ -65,22 +66,3 @@ export default async function Page({ params }: any) {
     </article>
   )
 }
-
-const toBase64 = (str: string) =>
-  typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
-
-const shimmer = (w: number, h: number) => `
-<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-    <linearGradient id="g">
-      <stop stop-color="#333" offset="20%" />
-      <stop stop-color="#222" offset="50%" />
-      <stop stop-color="#333" offset="70%" />
-    </linearGradient>
-  </defs>
-  <rect width="${w}" height="${h}" fill="#333" />
-  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-</svg>`
