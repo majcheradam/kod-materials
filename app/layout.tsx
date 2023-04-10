@@ -1,10 +1,11 @@
+import Footer from './footer'
 import './globals.css'
 import { Header } from './header'
 import type { Metadata } from 'next'
 
 import { Roboto } from 'next/font/google'
 
-const roboto = Roboto({ subsets: ['latin-ext'], weight: ['400'] })
+const roboto = Roboto({ subsets: ['latin-ext'], weight: '400' })
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body className={roboto.className}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )

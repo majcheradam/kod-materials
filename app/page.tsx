@@ -76,7 +76,7 @@ export default async function Home() {
               </div>
               <div className="flex flex-col gap-2">
                 <h2 className="text-2xl font-bold">{post.title}</h2>
-                <p className="line-clamp-2">{post.excerpt}</p>
+                <p className="line-clamp-2 text-[#444444]">{post.excerpt}</p>
               </div>
               <div className="flex">
                 <Link
