@@ -1,45 +1,10 @@
 import Markdown from 'markdown-to-jsx'
 import Image from 'next/image'
 import { shimmer, toBase64 } from '@/lib/image-blur'
-
-async function getPost(params: any) {
-  const response = await fetch(
-    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
-    {
-      cache: 'no-store',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        query: `{
-              post(where: {slug: "${params.slug}"}) {
-                featuredImage {
-                  url
-                }
-                title
-                slug
-                content
-                category {
-                  ... on Category {
-                    name
-                  }
-                }
-              }
-          }`,
-        variables: {
-          slug: params.slug,
-        },
-      }),
-    }
-  )
-  const { data } = await response.json()
-  return data.post
-}
+import { getPostBySlug } from '@/lib/queries'
 
 export default async function Page({ params }: any) {
-  const post = await getPost(params)
+  const post = await getPostBySlug(params)
 
   return (
     <article className="mx-auto mb-10 px-4 md:px-0 prose md:prose-lg prose-slate">
