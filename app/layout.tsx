@@ -39,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl">
-      <body className={roboto.className}>
+      <body className={`min-h-screen ` + roboto.className}>
         <Header />
         {children}
         <Footer />
