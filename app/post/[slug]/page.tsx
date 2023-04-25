@@ -1,12 +1,13 @@
 import Markdown from 'markdown-to-jsx'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { shimmer, toBase64 } from '@/lib/image-blur'
 import { getPostBySlug } from '@/lib/queries'
 
 export default async function Page({ params }: any) {
   const post = await getPostBySlug(params)
 
-  return (
+  return post ? (
     <article className="mx-auto mb-10 px-4 md:px-0 prose md:prose-lg prose-slate">
       <div className="h-[240px] sm:h-[300px] md:h-[400px] w-full relative mb-10">
         <Image
@@ -29,5 +30,7 @@ export default async function Page({ params }: any) {
       <h1 className="">{post.title}</h1>
       <Markdown>{post.content}</Markdown>
     </article>
+  ) : (
+    notFound()
   )
 }

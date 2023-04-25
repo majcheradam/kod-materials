@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { shimmer, toBase64 } from '@/lib/image-blur'
 import { getAllPosts } from '@/lib/queries'
 
 export default async function Home() {
   const posts = await getAllPosts()
 
-  return (
+  return posts.length > 0 ? (
     <main className="max-w-[1440px] mx-auto py-6 lg:px-20">
       <section className="max-w-[1440px] mx-auto gap-4 j flex lg:justify-start justify-center flex-wrap">
         {posts.map((post) => (
@@ -48,5 +49,7 @@ export default async function Home() {
         ))}
       </section>
     </main>
+  ) : (
+    notFound()
   )
 }

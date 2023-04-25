@@ -1,38 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-
-async function getAllCategories() {
-  const response = await fetch(
-    'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/clfqi8une019a01uebyhb36aq/master',
-    {
-      cache: 'no-store',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        query: `{
-          categories {
-            name
-            slug
-          }
-        }
-        `,
-      }),
-    }
-  )
-  const { data } = await response.json()
-  return data.categories
-}
-
-interface Categories {
-  name: string
-  slug: string
-}
+import { getAllCategories } from '@/lib/queries'
+import Hamburger from './hamburger'
 
 export const Header = (async () => {
   const categories = await getAllCategories()
+
   return (
     <header className="max-w-[1440px] mx-auto flex items-center justify-between py-6 px-4 lg:px-20">
       <Link href="/" aria-label="Przejdź do strony głównej">
@@ -40,7 +13,7 @@ export const Header = (async () => {
       </Link>
       <nav className="hidden lg:inline">
         <ul className="flex flex-row items-center gap-6 text-lg cursor-pointer">
-          {categories.map((categories: Categories) => (
+          {categories.map((categories) => (
             <li
               className="relative after:absolute after:w-1 after:h-1 after:rounded-full after:-right-3.5 after:top-1/2 after:-translate-y-1/2 after:bg-current after:cursor-default"
               key={categories.name}
@@ -78,9 +51,7 @@ export const Header = (async () => {
           </li>
         </ul>
       </nav>
-      <button className="lg:hidden" aria-label="Otwórz menu" role="button">
-        <Image src="/hamburger.svg" alt="" width={42} height={42} priority />
-      </button>
+      <Hamburger categories={categories} />
     </header>
   )
 }) as unknown as () => JSX.Element

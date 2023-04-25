@@ -1,3 +1,5 @@
+// Types
+
 type Post = {
   featuredImage: { url: string }
   title: string
@@ -10,6 +12,13 @@ type Post = {
 type Params = {
   slug: string
 }
+
+export type Categories = {
+  name: string
+  slug: string
+}
+
+// Queries
 
 async function fetchGraphQL(query: string, variables?: any) {
   const response = await fetch(
@@ -77,4 +86,16 @@ export async function getAllPosts(): Promise<Post[]> {
     }
   `)
   return posts
+}
+
+export async function getAllCategories(): Promise<Categories[]> {
+  const { categories } = await fetchGraphQL(`
+    query GetAllCategories {
+      categories {
+        name
+        slug
+      }
+    }
+  `)
+  return categories
 }
